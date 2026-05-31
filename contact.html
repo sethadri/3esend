@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — 3E Send</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: var(--gray-50); }
+    .nav-light { background: rgba(255,255,255,.95); backdrop-filter: blur(20px); box-shadow: var(--shadow-sm); }
+    .nav-light .nav-toggle span { background: var(--navy); }
+    .contact-section { padding: var(--section-pad); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; max-width: 1180px; margin: 0 auto; }
+    .contact-info h2 { margin-bottom: 16px; }
+    .contact-info > p { margin-bottom: 40px; }
+    .contact-method { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--white); border: 1.5px solid var(--gray-200); border-radius: var(--radius-lg); margin-bottom: 16px; transition: all var(--dur) var(--ease); }
+    .contact-method:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+    .contact-method-icon { width: 44px; height: 44px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .contact-method h4 { font-size: .9rem; color: var(--navy); margin-bottom: 4px; }
+    .contact-method p { font-size: .85rem; margin: 0; }
+    .contact-method a { font-size: .9rem; color: var(--primary); font-weight: 600; display: block; margin-top: 4px; }
+    .contact-form-card { background: var(--white); border-radius: var(--radius-xl); padding: 48px; box-shadow: var(--shadow-md); }
+    .contact-form-card h3 { margin-bottom: 8px; }
+    .contact-form-card > p { margin-bottom: 32px; font-size: .95rem; }
+    @media (max-width: 1024px) { .contact-inner { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .contact-form-card { padding: 28px 24px; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav nav-light" id="nav">
+    <div class="nav-logo" style="color:var(--navy);">3E<span>Send</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="countries.html">Countries</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="help-centre.html">Help</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Log In</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="container">
+      <div class="section-label" style="justify-content:center;">We're Here to Help</div>
+      <h1>Get in Touch</h1>
+      <p>Have a question or need support? Our team typically responds within 1 hour during business hours.</p>
+    </div>
+  </div>
+
+  <section class="contact-section">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <h2>Contact us directly</h2>
+        <p>Choose the best way to reach us. We're available 7 days a week.</p>
+
+        <div class="contact-method">
+          <div class="contact-method-icon" style="background:rgba(67,97,238,.12);">💬</div>
+          <div>
+            <h4>Live Chat</h4>
+            <p>Chat with our support team in real time. Available Mon–Fri 8am–8pm.</p>
+            <a href="#">Start a chat →</a>
+          </div>
+        </div>
+
+        <div class="contact-method">
+          <div class="contact-method-icon" style="background:rgba(0,200,150,.12);">📧</div>
+          <div>
+            <h4>Email Support</h4>
+            <p>We reply within 1 business hour.</p>
+            <a href="mailto:support@3esend.com">support@3esend.com</a>
+          </div>
+        </div>
+
+        <div class="contact-method">
+          <div class="contact-method-icon" style="background:rgba(249,168,37,.15);">📞</div>
+          <div>
+            <h4>Phone Support</h4>
+            <p>Available Mon–Fri 9am–6pm (UK time).</p>
+            <a href="tel:+441234567890">+44 (0)123 456 7890</a>
+          </div>
+        </div>
+
+        <div class="contact-method">
+          <div class="contact-method-icon" style="background:rgba(255,107,107,.12);">❓</div>
+          <div>
+            <h4>Help Centre</h4>
+            <p>Find answers to the most common questions in our FAQ library.</p>
+            <a href="help-centre.html">Browse Help Centre →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <h3>Send us a message</h3>
+        <p>Fill out the form and we'll get back to you as soon as possible.</p>
+        <form onsubmit="return false;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-group">
+              <label class="form-label">First name</label>
+              <input type="text" class="form-control" placeholder="John">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last name</label>
+              <input type="text" class="form-control" placeholder="Smith">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-control" placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <select class="form-control">
+              <option>General enquiry</option>
+              <option>Transfer issue</option>
+              <option>Account verification</option>
+              <option>Pricing & fees</option>
+              <option>Business enquiry</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="5" placeholder="Describe your question or issue in detail..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">3E<span style="color:var(--teal)">Send</span></div>
+        <p>Efficient, Easy, Everywhere.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a><a href="countries.html">Countries</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About Us</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="help-centre.html">Help Centre</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 3E Send Ltd. FCA Regulated.</span></div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

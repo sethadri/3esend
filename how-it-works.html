@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works — 3E Send</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: var(--white); }
+    .nav-light { background: rgba(255,255,255,.95); backdrop-filter: blur(20px); box-shadow: var(--shadow-sm); }
+    .nav-light .nav-toggle span { background: var(--navy); }
+    .steps-section { padding: var(--section-pad); }
+    .steps-inner { display: grid; grid-template-columns: 1fr 480px; gap: 80px; align-items: start; max-width: 1180px; margin: 0 auto; }
+    .sticky-visual { position: sticky; top: 120px; }
+    .step-visual-card {
+      background: var(--grad-hero);
+      border-radius: var(--radius-xl);
+      padding: 48px 40px;
+      box-shadow: var(--shadow-glow), var(--shadow-lg);
+      text-align: center;
+    }
+    .step-visual-icon { font-size: 4rem; margin-bottom: 20px; }
+    .step-visual-card h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 12px; }
+    .step-visual-card p { color: rgba(255,255,255,.7); font-size: .95rem; }
+    .step-dots { display: flex; gap: 8px; justify-content: center; margin-top: 28px; }
+    .step-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.25); transition: all .3s; }
+    .step-dot.active { background: var(--teal); width: 28px; border-radius: 5px; }
+    .big-step-list { display: flex; flex-direction: column; gap: 0; padding-top: 8px; }
+    .big-step {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 24px;
+      padding-bottom: 48px;
+      cursor: pointer;
+      position: relative;
+    }
+    .big-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 35px; top: 72px; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary) 0%, rgba(67,97,238,.1) 100%);
+    }
+    .big-step-num {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--gray-100);
+      border: 2px solid var(--gray-200);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--gray-400);
+      transition: all .3s;
+      position: relative; z-index: 1;
+      flex-shrink: 0;
+    }
+    .big-step.active .big-step-num {
+      background: var(--grad-primary);
+      border-color: transparent;
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(67,97,238,.4);
+    }
+    .big-step-body h3 { font-size: 1.2rem; margin-bottom: 8px; color: var(--gray-400); transition: color .3s; padding-top: 18px; }
+    .big-step.active .big-step-body h3 { color: var(--navy); }
+    .big-step-body p { display: none; font-size: .95rem; }
+    .big-step.active .big-step-body p { display: block; }
+
+    /* Delivery methods */
+    .delivery-section { padding: var(--section-pad); background: var(--gray-50); }
+    .delivery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+    .delivery-card { text-align: center; }
+    .delivery-card .card-icon { margin: 0 auto 20px; width: 64px; height: 64px; font-size: 1.8rem; border-radius: var(--radius-lg); }
+
+    /* Security */
+    .security-section { padding: var(--section-pad); }
+    .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+
+    @media (max-width: 1024px) {
+      .steps-inner { grid-template-columns: 1fr; }
+      .sticky-visual { position: static; }
+    }
+    @media (max-width: 768px) {
+      .delivery-grid, .security-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav nav-light" id="nav">
+    <div class="nav-logo" style="color:var(--navy);">3E<span>Send</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how-it-works.html" style="color:var(--primary);">How It Works</a></li>
+      <li><a href="countries.html">Countries</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="help-centre.html">Help</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Log In</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="container">
+      <div class="section-label" style="justify-content:center;">Simple & Transparent</div>
+      <h1>How 3E Send Works</h1>
+      <p>Sending money internationally shouldn't be complex. We've made it as simple as 3 steps.</p>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <section class="steps-section">
+    <div class="steps-inner">
+      <div class="big-step-list" id="stepList">
+        <div class="big-step active" data-step="0">
+          <div class="big-step-num">1</div>
+          <div class="big-step-body">
+            <h3>Create your account</h3>
+            <p>Sign up with your email address and complete our quick, secure identity verification. It takes under 5 minutes and you only do it once. We're fully regulated, so your details are handled with care.</p>
+          </div>
+        </div>
+        <div class="big-step" data-step="1">
+          <div class="big-step-num">2</div>
+          <div class="big-step-body">
+            <h3>Add your recipient</h3>
+            <p>Enter your recipient's name and choose how they'd like to receive the money — bank transfer, mobile wallet, or cash pickup. Save them as a contact for faster future transfers.</p>
+          </div>
+        </div>
+        <div class="big-step" data-step="2">
+          <div class="big-step-num">3</div>
+          <div class="big-step-body">
+            <h3>Choose amount & currency</h3>
+            <p>Enter how much you want to send. Our calculator shows the exact exchange rate and fees upfront — no surprises. Lock in the rate and proceed with confidence.</p>
+          </div>
+        </div>
+        <div class="big-step" data-step="3">
+          <div class="big-step-num">4</div>
+          <div class="big-step-body">
+            <h3>Pay securely</h3>
+            <p>Pay by debit card, credit card, or bank transfer. All payments are processed through secure, encrypted channels. You'll receive an instant confirmation once your payment is processed.</p>
+          </div>
+        </div>
+        <div class="big-step" data-step="4">
+          <div class="big-step-num">5</div>
+          <div class="big-step-body">
+            <h3>Money delivered</h3>
+            <p>Your recipient gets notified and receives the funds, usually within minutes. You can track every step in real time from your dashboard, and we'll send you updates along the way.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-visual">
+        <div class="step-visual-card" id="stepCard">
+          <div class="step-visual-icon" id="stepIcon">👤</div>
+          <h3 id="stepTitle">Create Your Account</h3>
+          <p id="stepDesc">Fast, secure sign-up in under 5 minutes. Verify once, send forever.</p>
+          <div class="step-dots">
+            <div class="step-dot active" id="dot0"></div>
+            <div class="step-dot" id="dot1"></div>
+            <div class="step-dot" id="dot2"></div>
+            <div class="step-dot" id="dot3"></div>
+            <div class="step-dot" id="dot4"></div>
+          </div>
+        </div>
+        <div style="margin-top:28px;text-align:center;">
+          <a href="register.html" class="btn btn-primary btn-lg">Start Now →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIVERY METHODS -->
+  <section class="delivery-section">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label">Delivery Options</div>
+        <h2 class="section-title">Three ways to receive</h2>
+        <p class="section-sub">Your recipient picks how they want their money. We handle the rest.</p>
+      </div>
+      <div class="delivery-grid">
+        <div class="card delivery-card">
+          <div class="card-icon blue">🏦</div>
+          <h3>Bank Transfer</h3>
+          <p>Direct deposit into any local bank account. Available in all supported countries. Typically arrives within minutes to 1 business day.</p>
+          <div class="badge badge-teal" style="margin-top:16px;">Most Popular</div>
+        </div>
+        <div class="card delivery-card">
+          <div class="card-icon teal">📱</div>
+          <h3>Mobile Wallet</h3>
+          <p>Instant top-up to MTN, Airtel Money, M-Pesa, and other major mobile wallets. Perfect for everyday use.</p>
+          <div class="badge badge-blue" style="margin-top:16px;">Fastest</div>
+        </div>
+        <div class="card delivery-card">
+          <div class="card-icon gold">💵</div>
+          <h3>Cash Pickup</h3>
+          <p>Your recipient collects cash at one of 10,000+ pickup agents across our coverage network. Just show ID.</p>
+          <div class="badge badge-gold" style="margin-top:16px;">No Account Needed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="security-section">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label">Your Safety</div>
+        <h2 class="section-title">Security you can trust</h2>
+        <p class="section-sub">We take security seriously, so you don't have to worry.</p>
+      </div>
+      <div class="security-grid">
+        <div class="card">
+          <div class="card-icon blue">🔐</div>
+          <h3>256-Bit Encryption</h3>
+          <p>Every transaction and personal detail is encrypted using the same standard as global banks.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon teal">🏛️</div>
+          <h3>FCA Regulated</h3>
+          <p>3E Send is authorised and regulated by the Financial Conduct Authority (UK). Your money is protected.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon gold">🔑</div>
+          <h3>Two-Factor Authentication</h3>
+          <p>Every login and transfer is protected with 2FA. Only you can access your account.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon coral">🛡️</div>
+          <h3>Fraud Monitoring</h3>
+          <p>Our 24/7 automated system monitors all transactions for suspicious activity and alerts you instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">3E<span style="color:var(--teal)">Send</span></div>
+        <p>Efficient, Easy, Everywhere. Sending money across borders shouldn't be complicated or expensive.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="countries.html">Countries</a>
+        <a href="business.html">For Business</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="help-centre.html">Help Centre</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 3E Send Ltd. FCA Regulated.</span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    const stepData = [
+      { icon: '👤', title: 'Create Your Account', desc: 'Fast, secure sign-up in under 5 minutes. Verify once, send forever.' },
+      { icon: '👥', title: 'Add Your Recipient', desc: 'Save recipients for faster future transfers. Bank, wallet, or cash.' },
+      { icon: '💱', title: 'Choose Amount', desc: 'See exact rates and fees upfront. No hidden charges, ever.' },
+      { icon: '💳', title: 'Pay Securely', desc: 'Card or bank transfer. Encrypted and instant confirmation.' },
+      { icon: '✅', title: 'Money Delivered!', desc: 'Track in real time. Usually within minutes.' },
+    ];
+    const steps = document.querySelectorAll('.big-step');
+    steps.forEach(step => {
+      step.addEventListener('click', () => {
+        steps.forEach(s => s.classList.remove('active'));
+        step.classList.add('active');
+        const i = parseInt(step.dataset.step);
+        document.getElementById('stepIcon').textContent = stepData[i].icon;
+        document.getElementById('stepTitle').textContent = stepData[i].title;
+        document.getElementById('stepDesc').textContent = stepData[i].desc;
+        for (let j = 0; j < 5; j++) {
+          document.getElementById('dot'+j).classList.toggle('active', j === i);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

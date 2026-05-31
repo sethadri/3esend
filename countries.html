@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countries — 3E Send</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: var(--gray-50); }
+    .nav-light { background: rgba(255,255,255,.95); backdrop-filter: blur(20px); box-shadow: var(--shadow-sm); }
+    .nav-light .nav-toggle span { background: var(--navy); }
+    .countries-page { padding: var(--section-pad); }
+    .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+    .filter-btn { padding: 8px 20px; border-radius: var(--radius-pill); border: 2px solid var(--gray-200); background: var(--white); font-size: .875rem; font-weight: 600; color: var(--gray-600); cursor: pointer; transition: all var(--dur) var(--ease); }
+    .filter-btn.active, .filter-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+    .countries-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .country-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all var(--dur) var(--ease);
+    }
+    .country-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .country-card-top { display: flex; align-items: center; gap: 12px; }
+    .country-emoji { font-size: 2rem; }
+    .country-name { font-weight: 700; color: var(--navy); font-size: 1rem; }
+    .country-currency { font-size: .8rem; color: var(--gray-400); }
+    .country-meta { display: flex; flex-direction: column; gap: 6px; }
+    .meta-row { display: flex; justify-content: space-between; align-items: center; font-size: .82rem; }
+    .meta-label { color: var(--gray-400); }
+    .meta-value { font-weight: 600; color: var(--navy); }
+    .meta-value.teal { color: var(--teal-dark); }
+    .delivery-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+    .delivery-pill { font-size: .72rem; padding: 3px 8px; border-radius: var(--radius-pill); background: var(--gray-100); color: var(--gray-600); font-weight: 500; }
+    @media (max-width: 1024px) { .countries-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 768px) { .countries-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px) { .countries-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav nav-light" id="nav">
+    <div class="nav-logo" style="color:var(--navy);">3E<span>Send</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="countries.html" style="color:var(--primary);">Countries</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="help-centre.html">Help</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Log In</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="container">
+      <div class="section-label" style="justify-content:center;">Global Coverage</div>
+      <h1>25+ Countries & Growing</h1>
+      <p>Send money to friends and family across Africa, Asia, and beyond. New corridors added regularly.</p>
+    </div>
+  </div>
+
+  <section class="countries-page">
+    <div class="container">
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterCountries('all',this)">All Countries</button>
+        <button class="filter-btn" onclick="filterCountries('west-africa',this)">West Africa</button>
+        <button class="filter-btn" onclick="filterCountries('east-africa',this)">East Africa</button>
+        <button class="filter-btn" onclick="filterCountries('asia',this)">Asia</button>
+        <button class="filter-btn" onclick="filterCountries('caribbean',this)">Caribbean</button>
+      </div>
+
+      <div class="countries-grid" id="countriesGrid">
+        <!-- West Africa -->
+        <div class="country-card" data-region="west-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇬🇭</span>
+            <div><div class="country-name">Ghana</div><div class="country-currency">Ghanaian Cedi (GHS)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 17.85 GHS</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">⚡ Instant</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£1.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 MTN MoMo</span><span class="delivery-pill">💵 Cash</span></div>
+        </div>
+
+        <div class="country-card" data-region="west-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇳🇬</span>
+            <div><div class="country-name">Nigeria</div><div class="country-currency">Nigerian Naira (NGN)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 1,650 NGN</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">⚡ Instant</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£1.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 OPay</span><span class="delivery-pill">💵 Cash</span></div>
+        </div>
+
+        <div class="country-card" data-region="west-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇬🇲</span>
+            <div><div class="country-name">Gambia</div><div class="country-currency">Gambian Dalasi (GMD)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 72.00 GMD</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">⚡ Instant</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£1.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 Africell</span><span class="delivery-pill">💵 Cash</span></div>
+        </div>
+
+        <div class="country-card" data-region="west-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇸🇳</span>
+            <div><div class="country-name">Senegal</div><div class="country-currency">West African CFA (XOF)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 790 XOF</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">🕐 1–2 hrs</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.49</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 Wave</span><span class="delivery-pill">💵 Cash</span></div>
+        </div>
+
+        <div class="country-card" data-region="west-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇸🇱</span>
+            <div><div class="country-name">Sierra Leone</div><div class="country-currency">Leone (SLL)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 22,800 SLL</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">⚡ Instant</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.49</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 Orange Money</span></div>
+        </div>
+
+        <div class="country-card" data-region="west-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇨🇮</span>
+            <div><div class="country-name">Côte d'Ivoire</div><div class="country-currency">West African CFA (XOF)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 790 XOF</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">🕐 1–2 hrs</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.49</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 MTN MoMo</span></div>
+        </div>
+
+        <div class="country-card" data-region="west-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇬🇳</span>
+            <div><div class="country-name">Guinea</div><div class="country-currency">Guinean Franc (GNF)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 10,800 GNF</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">🕐 2–4 hrs</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">💵 Cash</span></div>
+        </div>
+
+        <div class="country-card" data-region="west-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇹🇬</span>
+            <div><div class="country-name">Togo</div><div class="country-currency">West African CFA (XOF)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 790 XOF</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">🕐 1–2 hrs</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.49</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 Flooz</span></div>
+        </div>
+
+        <!-- East Africa -->
+        <div class="country-card" data-region="east-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇰🇪</span>
+            <div><div class="country-name">Kenya</div><div class="country-currency">Kenyan Shilling (KES)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 163 KES</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">⚡ Instant</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£1.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 M-Pesa</span></div>
+        </div>
+
+        <div class="country-card" data-region="east-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇺🇬</span>
+            <div><div class="country-name">Uganda</div><div class="country-currency">Ugandan Shilling (UGX)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 4,650 UGX</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">⚡ Instant</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£1.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 MTN MoMo</span></div>
+        </div>
+
+        <div class="country-card" data-region="east-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇿🇲</span>
+            <div><div class="country-name">Zambia</div><div class="country-currency">Zambian Kwacha (ZMW)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 28.5 ZMW</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">🕐 1–2 hrs</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.49</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 Airtel Money</span></div>
+        </div>
+
+        <div class="country-card" data-region="east-africa">
+          <div class="country-card-top">
+            <span class="country-emoji">🇿🇼</span>
+            <div><div class="country-name">Zimbabwe</div><div class="country-currency">US Dollar (USD)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 1.27 USD</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">🕐 1–4 hrs</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">💵 Cash</span></div>
+        </div>
+
+        <!-- Asia -->
+        <div class="country-card" data-region="asia">
+          <div class="country-card-top">
+            <span class="country-emoji">🇵🇭</span>
+            <div><div class="country-name">Philippines</div><div class="country-currency">Philippine Peso (PHP)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 70.5 PHP</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">🕐 1–4 hrs</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 GCash</span><span class="delivery-pill">💵 Cash</span></div>
+        </div>
+
+        <div class="country-card" data-region="asia">
+          <div class="country-card-top">
+            <span class="country-emoji">🇮🇳</span>
+            <div><div class="country-name">India</div><div class="country-currency">Indian Rupee (INR)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 106 INR</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">⚡ Instant</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£1.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">📱 UPI</span></div>
+        </div>
+
+        <!-- Caribbean -->
+        <div class="country-card" data-region="caribbean">
+          <div class="country-card-top">
+            <span class="country-emoji">🇯🇲</span>
+            <div><div class="country-name">Jamaica</div><div class="country-currency">Jamaican Dollar (JMD)</div></div>
+          </div>
+          <div class="country-meta">
+            <div class="meta-row"><span class="meta-label">Rate</span><span class="meta-value teal">£1 = 196 JMD</span></div>
+            <div class="meta-row"><span class="meta-label">Speed</span><span class="meta-value">🕐 1–4 hrs</span></div>
+            <div class="meta-row"><span class="meta-label">Fee from</span><span class="meta-value">£2.99</span></div>
+          </div>
+          <div class="delivery-pills"><span class="delivery-pill">🏦 Bank</span><span class="delivery-pill">💵 Cash</span></div>
+        </div>
+      </div>
+
+      <!-- Coming Soon -->
+      <div style="margin-top:48px;text-align:center;padding:40px;background:var(--white);border-radius:var(--radius-xl);border:2px dashed var(--gray-200);">
+        <div style="font-size:2.5rem;margin-bottom:12px;">🌍</div>
+        <h3 style="color:var(--navy);margin-bottom:8px;">More countries coming soon</h3>
+        <p style="max-width:400px;margin:0 auto 24px;">We're constantly expanding. Can't find your country? Let us know and we'll prioritise it.</p>
+        <a href="contact.html" class="btn btn-primary">Request a Country →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">3E<span style="color:var(--teal)">Send</span></div>
+        <p>Efficient, Easy, Everywhere. The smarter way to send money internationally.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a><a href="countries.html">Countries</a><a href="business.html">For Business</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About Us</a><a href="contact.html">Contact</a><a href="#">Blog</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="help-centre.html">Help Centre</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 3E Send Ltd. FCA Regulated.</span></div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    function filterCountries(region, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.country-card').forEach(card => {
+        if (region === 'all' || card.dataset.region === region) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

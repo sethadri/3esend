@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — 3E Send</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: var(--gray-50); }
+    .nav-light { background: rgba(255,255,255,.95); backdrop-filter: blur(20px); box-shadow: var(--shadow-sm); }
+    .nav-light .nav-toggle span { background: var(--navy); }
+    .pricing-section { padding: var(--section-pad); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; align-items: start; }
+    .rate-table { background: var(--white); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-md); margin-top: 64px; }
+    .rate-table h2 { margin-bottom: 8px; }
+    .rate-table > p { margin-bottom: 32px; }
+    .rate-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: .9rem;
+    }
+    .rate-row.header {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      border-bottom: 2px solid var(--gray-200);
+      padding-bottom: 12px;
+    }
+    .rate-row:last-child { border-bottom: none; }
+    .rate-flag { font-size: 1.2rem; }
+    .rate-country { font-weight: 600; color: var(--navy); }
+    .rate-currency { color: var(--gray-600); }
+    .rate-fee { color: var(--teal-dark); font-weight: 600; }
+    .rate-time { color: var(--gray-400); font-size: .85rem; }
+    .badge-row { font-size: .75rem; }
+    .faq-section { padding: var(--section-pad); max-width: 760px; margin: 0 auto; }
+    .faq-section h2 { text-align: center; margin-bottom: 48px; }
+    @media (max-width: 768px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .rate-row { grid-template-columns: 32px 1fr 1fr; }
+      .rate-row .rate-time { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav nav-light" id="nav">
+    <div class="nav-logo" style="color:var(--navy);">3E<span>Send</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="countries.html">Countries</a></li>
+      <li><a href="pricing.html" style="color:var(--primary);">Pricing</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="help-centre.html">Help</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Log In</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="container">
+      <div class="section-label" style="justify-content:center;">Transparent Pricing</div>
+      <h1>Simple, honest fees</h1>
+      <p>No hidden charges. No nasty surprises. Pay a small flat fee and get the best possible rate.</p>
+    </div>
+  </div>
+
+  <!-- PLANS -->
+  <section class="pricing-section">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label">Plans</div>
+        <h2 class="section-title">Choose your plan</h2>
+        <p class="section-sub">All plans include real-time tracking, 24/7 support, and bank-level security.</p>
+      </div>
+      <div class="pricing-grid">
+        <!-- Starter -->
+        <div class="pricing-card">
+          <span class="badge badge-blue">Starter</span>
+          <div class="price">£2.99 <span>/ transfer</span></div>
+          <p style="font-size:.9rem;margin-bottom:0;">Perfect for occasional senders who need a fast, reliable option.</p>
+          <div class="check-list">
+            <div class="check-item">Up to £500 per transfer</div>
+            <div class="check-item">Standard exchange rate</div>
+            <div class="check-item">Bank & wallet delivery</div>
+            <div class="check-item">Email notifications</div>
+            <div class="check-item disabled">Priority processing</div>
+            <div class="check-item disabled">Dedicated support</div>
+          </div>
+          <a href="register.html" class="btn btn-ghost" style="justify-content:center;">Get Started Free</a>
+        </div>
+
+        <!-- Pro (featured) -->
+        <div class="pricing-card featured">
+          <span class="badge" style="background:rgba(0,200,150,.2);color:var(--teal);">⭐ Most Popular</span>
+          <div class="price">£1.99 <span>/ transfer</span></div>
+          <p style="font-size:.9rem;margin-bottom:0;color:rgba(255,255,255,.7);">Best for regular senders who want lower fees and better rates.</p>
+          <div class="check-list">
+            <div class="check-item">Up to £5,000 per transfer</div>
+            <div class="check-item">Competitive exchange rate</div>
+            <div class="check-item">Bank, wallet & cash pickup</div>
+            <div class="check-item">SMS + email notifications</div>
+            <div class="check-item">Priority processing</div>
+            <div class="check-item disabled">Dedicated support</div>
+          </div>
+          <a href="register.html" class="btn btn-teal" style="justify-content:center;">Start Free Trial</a>
+        </div>
+
+        <!-- Business -->
+        <div class="pricing-card">
+          <span class="badge badge-gold">Business</span>
+          <div class="price">Custom</div>
+          <p style="font-size:.9rem;margin-bottom:0;">For companies and high-volume senders with custom needs.</p>
+          <div class="check-list">
+            <div class="check-item">Unlimited transfer size</div>
+            <div class="check-item">Best exchange rates</div>
+            <div class="check-item">All delivery methods</div>
+            <div class="check-item">Webhook & API access</div>
+            <div class="check-item">Priority processing</div>
+            <div class="check-item">Dedicated account manager</div>
+          </div>
+          <a href="business.html" class="btn btn-ghost" style="justify-content:center;">Contact Sales</a>
+        </div>
+      </div>
+
+      <!-- RATE TABLE -->
+      <div class="rate-table">
+        <div class="section-label">Live Rates</div>
+        <h2>Today's exchange rates</h2>
+        <p>Rates shown are indicative and updated every hour. Final rate locked at checkout.</p>
+        <div class="rate-row header">
+          <span></span>
+          <span>Country</span>
+          <span>Rate (per £1)</span>
+          <span>Fee</span>
+          <span>Delivery</span>
+        </div>
+        <div class="rate-row">
+          <span class="rate-flag">🇬🇭</span>
+          <div><div class="rate-country">Ghana</div><div class="rate-currency">GHS</div></div>
+          <span>17.85 GHS</span>
+          <span class="rate-fee">£1.99</span>
+          <span class="rate-time">⚡ Instant</span>
+        </div>
+        <div class="rate-row">
+          <span class="rate-flag">🇳🇬</span>
+          <div><div class="rate-country">Nigeria</div><div class="rate-currency">NGN</div></div>
+          <span>1,650 NGN</span>
+          <span class="rate-fee">£1.99</span>
+          <span class="rate-time">⚡ Instant</span>
+        </div>
+        <div class="rate-row">
+          <span class="rate-flag">🇬🇲</span>
+          <div><div class="rate-country">Gambia</div><div class="rate-currency">GMD</div></div>
+          <span>72.00 GMD</span>
+          <span class="rate-fee">£1.99</span>
+          <span class="rate-time">⚡ Instant</span>
+        </div>
+        <div class="rate-row">
+          <span class="rate-flag">🇸🇳</span>
+          <div><div class="rate-country">Senegal</div><div class="rate-currency">XOF</div></div>
+          <span>790 XOF</span>
+          <span class="rate-fee">£2.49</span>
+          <span class="rate-time">🕐 1–2 hrs</span>
+        </div>
+        <div class="rate-row">
+          <span class="rate-flag">🇰🇪</span>
+          <div><div class="rate-country">Kenya</div><div class="rate-currency">KES</div></div>
+          <span>163 KES</span>
+          <span class="rate-fee">£1.99</span>
+          <span class="rate-time">⚡ Instant</span>
+        </div>
+        <div class="rate-row">
+          <span class="rate-flag">🇵🇭</span>
+          <div><div class="rate-country">Philippines</div><div class="rate-currency">PHP</div></div>
+          <span>70.5 PHP</span>
+          <span class="rate-fee">£2.99</span>
+          <span class="rate-time">🕐 1–4 hrs</span>
+        </div>
+        <p style="margin-top:20px;font-size:.82rem;color:var(--gray-400);">* Rates and fees vary by plan. Pro plan fees shown above.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>Pricing FAQs</h2>
+    <div class="faq-item open">
+      <button class="faq-q">Are there any hidden fees? <span class="faq-icon">+</span></button>
+      <div class="faq-a">No. The fee shown at checkout is the only fee you pay. We do not add a hidden margin to the exchange rate — what you see is what your recipient gets.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How is the exchange rate determined? <span class="faq-icon">+</span></button>
+      <div class="faq-a">We use the mid-market rate and add a small, clearly disclosed margin depending on the corridor. Our rates are updated hourly and are among the most competitive in the market.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Can I cancel or get a refund? <span class="faq-icon">+</span></button>
+      <div class="faq-a">If your transfer hasn't been processed yet, you can cancel and receive a full refund. Once funds are on their way, cancellation may not be possible. Contact support immediately if you need to cancel.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is there a minimum or maximum transfer amount? <span class="faq-icon">+</span></button>
+      <div class="faq-a">The minimum transfer is £10. Maximum amounts depend on your plan: £500 (Starter), £5,000 (Pro), unlimited (Business). Higher limits are available with additional verification.</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">3E<span style="color:var(--teal)">Send</span></div>
+        <p>Efficient, Easy, Everywhere. The smarter way to send money internationally.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="countries.html">Countries</a>
+        <a href="business.html">For Business</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="help-centre.html">Help Centre</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 3E Send Ltd. FCA Regulated.</span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

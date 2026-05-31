@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3E Send — Efficient · Easy · Everywhere</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--grad-hero);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 100px 80px 80px;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,200,150,.12);
+      border: 1px solid rgba(0,200,150,.3);
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow::before { content: '✦'; font-size: .7rem; }
+    .hero h1 { color: var(--white); margin-bottom: 24px; }
+    .hero h1 em {
+      font-style: normal;
+      background: var(--grad-teal);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub { color: rgba(255,255,255,.72); font-size: 1.15rem; max-width: 480px; margin-bottom: 40px; }
+    .hero-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .trust-item .num {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .trust-item .lbl { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: 4px; }
+    .trust-divider { width: 1px; height: 44px; background: rgba(255,255,255,.15); }
+
+    /* ── Calculator Card ── */
+    .calc-card {
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.3);
+    }
+    .calc-card h3 { color: var(--white); font-size: 1.1rem; margin-bottom: 28px; }
+    .calc-field { margin-bottom: 16px; }
+    .calc-label { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .calc-input-wrap {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,.08);
+      border: 1.5px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--dur) var(--ease);
+    }
+    .calc-input-wrap:focus-within { border-color: var(--teal); }
+    .calc-currency {
+      padding: 0 14px;
+      font-weight: 700;
+      font-size: .85rem;
+      color: var(--teal);
+      background: rgba(0,200,150,.1);
+      height: 52px;
+      display: flex; align-items: center;
+      border-right: 1px solid rgba(255,255,255,.1);
+      white-space: nowrap;
+    }
+    .calc-input-wrap input,
+    .calc-input-wrap select {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0 14px;
+      height: 52px;
+      color: var(--white);
+      font-size: 1.1rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      width: 100%;
+    }
+    .calc-input-wrap select option { background: var(--navy-800); color: var(--white); }
+    .calc-arrow {
+      text-align: center;
+      color: var(--teal);
+      font-size: 1.3rem;
+      margin: 8px 0;
+    }
+    .calc-result {
+      background: rgba(0,200,150,.1);
+      border: 1.5px solid rgba(0,200,150,.3);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .calc-result .result-label { font-size: .8rem; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+    .calc-result .result-amount { font-size: 2rem; font-weight: 800; color: var(--teal); font-family: var(--font-heading); }
+    .calc-result .result-rate { font-size: .8rem; color: rgba(255,255,255,.45); margin-top: 4px; }
+    .calc-card .btn { width: 100%; justify-content: center; margin-top: 20px; }
+
+    /* ── Features ── */
+    .features-section { padding: var(--section-pad); background: var(--gray-50); }
+    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
+
+    /* ── How it works (homepage snippet) ── */
+    .how-section { padding: var(--section-pad); }
+    .how-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1180px; margin: 0 auto; }
+    .how-visual {
+      background: var(--grad-hero);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: var(--shadow-glow), var(--shadow-lg);
+    }
+    .mock-row {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mock-row .left { display: flex; align-items: center; gap: 12px; }
+    .mock-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--grad-teal);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      color: var(--white);
+      font-size: .85rem;
+    }
+    .mock-name { font-weight: 600; color: var(--white); font-size: .9rem; }
+    .mock-country { font-size: .78rem; color: rgba(255,255,255,.5); }
+    .mock-amount { font-weight: 700; color: var(--teal); font-size: 1rem; }
+    .mock-status { font-size: .75rem; color: rgba(255,255,255,.45); }
+    .mock-header { color: rgba(255,255,255,.45); font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; padding: 0 4px; }
+
+    /* ── Countries preview ── */
+    .countries-section { padding: var(--section-pad); background: var(--gray-50); }
+    .country-tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+    .country-flag { font-size: 1.2rem; }
+
+    /* ── CTA Banner ── */
+    .cta-section {
+      background: var(--grad-hero);
+      padding: 96px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section h2, .cta-section p { color: var(--white); }
+    .cta-section p { color: rgba(255,255,255,.7); font-size: 1.1rem; max-width: 500px; margin: 16px auto 40px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Testimonials ── */
+    .testimonials { padding: var(--section-pad); }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
+    .testimonial-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stars { color: var(--gold); font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-text { font-size: .95rem; color: var(--gray-600); margin-bottom: 24px; font-style: italic; line-height: 1.75; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--white); font-size: .9rem; }
+    .author-name { font-weight: 600; color: var(--navy); font-size: .9rem; }
+    .author-loc { font-size: .8rem; color: var(--gray-400); }
+
+    @media (max-width: 1024px) {
+      .hero { padding: 100px 48px 72px; }
+      .hero-inner { gap: 40px; grid-template-columns: 1fr 360px; }
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 100px 24px 64px; min-height: auto; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .calc-card { margin-top: 0; }
+      .features-grid { grid-template-columns: 1fr; }
+      .how-inner { grid-template-columns: 1fr; gap: 40px; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .hero-trust { gap: 16px; }
+      .cta-section { padding: 72px 24px; }
+      .countries-section, .features-section, .testimonials { padding: var(--section-pad-sm); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo">3E<span>Send</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="countries.html">Countries</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="help-centre.html">Help</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+      <a href="register.html" class="btn btn-teal btn-sm">Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Trusted by 50,000+ senders</div>
+        <h1>Send Money<br><em>Efficiently, Easily,</em><br>Everywhere.</h1>
+        <p class="hero-sub">Fast, secure international money transfers to Africa and beyond. Lower fees. Better rates. Instant delivery.</p>
+        <div class="hero-cta">
+          <a href="register.html" class="btn btn-teal btn-lg">Start Sending →</a>
+          <a href="how-it-works.html" class="btn btn-outline btn-lg">How It Works</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <span class="num">50K+</span>
+            <span class="lbl">Happy Senders</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <span class="num">25+</span>
+            <span class="lbl">Countries</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <span class="num">£0</span>
+            <span class="lbl">Hidden Fees</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <span class="num">2 min</span>
+            <span class="lbl">Avg. Transfer</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALCULATOR -->
+      <div class="calc-card">
+        <h3>💸 Transfer Calculator</h3>
+        <div class="calc-field">
+          <div class="calc-label">You Send</div>
+          <div class="calc-input-wrap">
+            <span class="calc-currency">GBP £</span>
+            <input type="number" id="sendAmount" value="500" min="1" />
+          </div>
+        </div>
+        <div class="calc-arrow">↕</div>
+        <div class="calc-field">
+          <div class="calc-label">Recipient Gets</div>
+          <div class="calc-input-wrap">
+            <span class="calc-currency" id="receiveCurrencyLabel">GHS</span>
+            <select id="receiveCurrency">
+              <option value="17.85" data-code="GHS">Ghanaian Cedi (GHS)</option>
+              <option value="1650" data-code="NGN">Nigerian Naira (NGN)</option>
+              <option value="72" data-code="GMD">Gambian Dalasi (GMD)</option>
+              <option value="1.27" data-code="USD">US Dollar (USD)</option>
+              <option value="1.18" data-code="EUR">Euro (EUR)</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Recipient receives</div>
+          <div class="result-amount" id="resultAmount">8,925.00 GHS</div>
+          <div class="result-rate" id="resultRate">Rate: 1 GBP = 17.85 GHS · Fee: £2.99</div>
+        </div>
+        <a href="register.html" class="btn btn-teal">Send Now →</a>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.4);text-align:center;margin-top:12px;">Indicative rate. Final rate confirmed at checkout.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label">Why 3E Send</div>
+        <h2 class="section-title">Built for speed,<br>designed for trust</h2>
+        <p class="section-sub">Everything you need to send money with confidence, from anywhere in the world.</p>
+      </div>
+      <div class="features-grid">
+        <div class="card">
+          <div class="card-icon blue">⚡</div>
+          <h3>Efficient Transfers</h3>
+          <p>Funds typically arrive within minutes. No more waiting days for your money to arrive — we've built the fastest routes to get your money there.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon teal">✨</div>
+          <h3>Easy to Use</h3>
+          <p>Simple 3-step onboarding. Send money in under 2 minutes from your phone or browser, even if it's your first time.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon gold">🌍</div>
+          <h3>Everywhere You Need</h3>
+          <p>Bank account, mobile wallet, or cash pickup — your recipient chooses how they receive. Available across 25+ countries.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon coral">🔒</div>
+          <h3>Bank-Level Security</h3>
+          <p>256-bit encryption, regulated by the FCA, and protected by multi-factor authentication. Your money is always safe.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon teal">💰</div>
+          <h3>Low, Transparent Fees</h3>
+          <p>No hidden charges. What you see is what you pay. Consistently competitive exchange rates with no markup surprises.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon blue">📱</div>
+          <h3>Track Every Transfer</h3>
+          <p>Real-time notifications for every step of your transfer. You and your recipient stay informed the whole way through.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS SNIPPET -->
+  <section class="how-section">
+    <div class="how-inner">
+      <div>
+        <div class="section-label">Simple Process</div>
+        <h2 class="section-title">Send money in<br>3 easy steps</h2>
+        <div class="step-list" style="margin-top:40px;">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Create Your Account</h3>
+              <p>Sign up in minutes with just your email and ID. Fully verified, fully secure.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Enter Transfer Details</h3>
+              <p>Tell us how much, to whom, and how they'd like to receive it.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Pay & Relax</h3>
+              <p>Pay securely by card or bank transfer. We handle the rest — fast.</p>
+            </div>
+          </div>
+        </div>
+        <a href="how-it-works.html" class="btn btn-primary mt-32">Full Guide →</a>
+      </div>
+      <div class="how-visual">
+        <div class="mock-header">Recent Transfers</div>
+        <div class="mock-row">
+          <div class="left">
+            <div class="mock-avatar">AK</div>
+            <div>
+              <div class="mock-name">Ama Kofi</div>
+              <div class="mock-country">🇬🇭 Ghana · Bank</div>
+            </div>
+          </div>
+          <div>
+            <div class="mock-amount">1,785 GHS</div>
+            <div class="mock-status">✅ Delivered</div>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="left">
+            <div class="mock-avatar" style="background:linear-gradient(135deg,#F9A825,#FF6B35);">OA</div>
+            <div>
+              <div class="mock-name">Obiora Ade</div>
+              <div class="mock-country">🇳🇬 Nigeria · Wallet</div>
+            </div>
+          </div>
+          <div>
+            <div class="mock-amount">82,500 NGN</div>
+            <div class="mock-status">⏳ Processing</div>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="left">
+            <div class="mock-avatar" style="background:linear-gradient(135deg,#7B2FBE,#4361EE);">FJ</div>
+            <div>
+              <div class="mock-name">Fatou Jallow</div>
+              <div class="mock-country">🇬🇲 Gambia · Cash</div>
+            </div>
+          </div>
+          <div>
+            <div class="mock-amount">3,600 GMD</div>
+            <div class="mock-status">✅ Delivered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTRIES PREVIEW -->
+  <section class="countries-section">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label">Coverage</div>
+        <h2 class="section-title">Sending to 25+ countries</h2>
+        <p class="section-sub">From the UK to West Africa and beyond — we're expanding our network constantly.</p>
+      </div>
+      <div class="country-tags">
+        <span class="tag"><span class="country-flag">🇬🇭</span> Ghana</span>
+        <span class="tag"><span class="country-flag">🇳🇬</span> Nigeria</span>
+        <span class="tag"><span class="country-flag">🇬🇲</span> Gambia</span>
+        <span class="tag"><span class="country-flag">🇸🇳</span> Senegal</span>
+        <span class="tag"><span class="country-flag">🇸🇱</span> Sierra Leone</span>
+        <span class="tag"><span class="country-flag">🇨🇮</span> Côte d'Ivoire</span>
+        <span class="tag"><span class="country-flag">🇬🇳</span> Guinea</span>
+        <span class="tag"><span class="country-flag">🇹🇬</span> Togo</span>
+        <span class="tag"><span class="country-flag">🇧🇯</span> Benin</span>
+        <span class="tag"><span class="country-flag">🇲🇱</span> Mali</span>
+        <span class="tag"><span class="country-flag">🇰🇪</span> Kenya</span>
+        <span class="tag"><span class="country-flag">🇺🇬</span> Uganda</span>
+        <span class="tag"><span class="country-flag">🇿🇲</span> Zambia</span>
+        <span class="tag"><span class="country-flag">🇿🇼</span> Zimbabwe</span>
+        <span class="tag"><span class="country-flag">🇵🇭</span> Philippines</span>
+        <a href="countries.html" class="tag" style="border-style:dashed;color:var(--primary);">See All 25+ →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label">Real People, Real Results</div>
+        <h2 class="section-title">Loved by thousands<br>of senders</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"I've been sending money to my family in Ghana for years. 3E Send is the fastest and cheapest option I've found — money arrives before I even close the app!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:var(--grad-teal);">KA</div>
+            <div>
+              <div class="author-name">Kwame Asante</div>
+              <div class="author-loc">London → Ghana</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Finally a remittance app that doesn't feel outdated. The UI is clean, rates are great, and customer support actually responds. 10/10."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:linear-gradient(135deg,#F9A825,#FF6B35);">BN</div>
+            <div>
+              <div class="author-name">Blessing Nwosu</div>
+              <div class="author-loc">Manchester → Nigeria</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"My mother in Gambia gets her money in under 5 minutes, straight to her mobile wallet. The peace of mind is priceless."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:linear-gradient(135deg,#7B2FBE,#4361EE);">FD</div>
+            <div>
+              <div class="author-name">Fatima Diallo</div>
+              <div class="author-loc">Birmingham → Gambia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-section">
+    <div class="orb orb-2" style="right:-100px;left:auto;bottom:-80px;"></div>
+    <div style="position:relative;z-index:1;">
+      <div class="section-label" style="color:var(--teal);justify-content:center;">Get Started Free</div>
+      <h2>Ready to send smarter?</h2>
+      <p>Join 50,000+ senders who trust 3E Send for fast, affordable international transfers.</p>
+      <div class="cta-buttons">
+        <a href="register.html" class="btn btn-teal btn-lg">Create Free Account →</a>
+        <a href="pricing.html" class="btn btn-outline btn-lg">See Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">3E<span style="color:var(--teal)">Send</span></div>
+        <p>Efficient, Easy, Everywhere. Sending money across borders shouldn't be complicated or expensive. We're changing that.</p>
+        <div class="footer-social" style="margin-top:24px;">
+          <a href="#">𝕏</a>
+          <a href="#">in</a>
+          <a href="#">f</a>
+          <a href="#">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="countries.html">Countries</a>
+        <a href="business.html">For Business</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="help-centre.html">Help Centre</a>
+        <a href="#">Security</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 3E Send Ltd. All rights reserved. FCA Regulated.</span>
+      <div style="display:flex;gap:16px;font-size:.85rem;">
+        <a href="#" style="color:rgba(255,255,255,.45);">Privacy</a>
+        <a href="#" style="color:rgba(255,255,255,.45);">Terms</a>
+        <a href="#" style="color:rgba(255,255,255,.45);">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
